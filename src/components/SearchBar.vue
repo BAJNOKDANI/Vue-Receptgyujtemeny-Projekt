@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <section>
+    <section class="mt-3">
         <div class="row">
             <div class="col-lg-6">
                 <div class="form">
@@ -23,10 +23,10 @@
             <div class="col-lg-3">
                 <div class="form">
                     <select class="form-select">
-                        <option selected>Elkészítési idő szerint</option>
-                        <option value="1">30-60 perc</option>
-                        <option value="2">60-120 perc</option>
-                        <option value="3">120+ perc</option>
+                        <option selected>Rendezés</option>
+                        <option value="1">Név</option>
+                        <option value="2">Elkészítési idő szerint</option>
+                        <option value="3">Nehézség</option>  
                     </select>
                 </div>
             </div>
