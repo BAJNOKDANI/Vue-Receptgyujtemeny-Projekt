@@ -17,7 +17,7 @@ export const recipeData = [
     {
         kep: "../assets/turogomboc.jpg",
         nev: "Túrógombóc",
-        elkeszIdo: "60",
+        elkeszIdo: "60 perc",
         nehezseg: "közepes",
         leiras: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean malesuada, erat in sodales rhoncus, est dolor convallis eros, vitae tincidunt ipsum velit ac ante. Pellentesque eu nisi porta magna iaculis consectetur."
 

@@ -8,6 +8,13 @@ import { ref } from 'vue';
 const form = ref(false)
 const recipes = ref([]);
 
+const nev = ref("");
+const elkeszites = ref("");
+const nehezseg = ref("");
+const leiras = ref("");
+
+
+
 const init = () => {
   for (let i = 0; i < recipeData.length; i++) {
     const r = recipeData[i];
@@ -15,7 +22,7 @@ const init = () => {
   }
 }
 
-init();
+init()
 
 const formSwitch = () => {
   if (form.value == true) {
@@ -24,12 +31,20 @@ const formSwitch = () => {
   else {
     form.value = true;
   }
+}
+
 
   const loadImageFromUrl = (image) =>{
     return new URL(image, import.meta.url).href;
+    }
+
+const addRecipe = () =>{
+recipes.value.push(new Recipe(nev.value, elkeszites.value, nehezseg.value, leiras.value))
+console.log(recipes.value)
 }
 
-}
+
+
 </script>
 
 <template>
@@ -65,22 +80,22 @@ const formSwitch = () => {
       <form>
         <div class="mb-3">
           <label class="form-label">Név</label>
-          <input type="text" class="form-control">
+          <input v-model="nev" type="text" class="form-control">
         </div>
         <div class="mb-3">
           <label class="form-label">Elkészítési idő (perc)</label>
-          <input type="number" class="form-control">
+          <input v-model="elkeszites" type="number" class="form-control">
         </div>
         <div class="mb-3">
           <label class="form-label">Nehézség</label>
-          <input type="text" class="form-control">
+          <input v-model="nehezseg" type="text" class="form-control">
         </div>
         <div class="mb-3">
           <label class="form-label">Leírás</label>
-          <input type="text" class="form-control">
+          <input v-model="leiras" type="text" class="form-control">
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-success">Hozzáadás</button>
+          <button type="submit" class="btn btn-success" @click="addRecipe">Hozzáadás</button>
         </div>
       </form>
     </div>
