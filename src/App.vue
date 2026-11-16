@@ -38,13 +38,13 @@ const formSwitch = () => {
 }
 
 
-  const loadImageFromUrl = (image) =>{
-    return new URL(image, import.meta.url).href;
-    }
+const loadImageFromUrl = (image) => {
+  return new URL(image, import.meta.url).href;
+}
 
-const addRecipe = () =>{
-recipes.value.push(new Recipe(nev.value, elkeszites.value, nehezseg.value, leiras.value))
-console.log(recipes.value)
+const addRecipe = () => {
+  recipes.value.push(new Recipe(nev.value, elkeszites.value, nehezseg.value, leiras.value))
+  console.log(recipes.value)
 }
 
 const keyup = (f) => {
@@ -90,8 +90,9 @@ const searchedRecipes = computed(() => {
   </header>
   <main class="mt-3">
     <div v-if="!form" class="container">
-      <SearchBar @keyUp="keyup"/>
+      <SearchBar @keyUp="keyup" />
       <RecipeCard :recipes="searchedRecipes" />
+      <p v-if="search != '' && searchedRecipes.length == 0" class="text-center mt-5 nincs-talalat">Nincs találat</p>
     </div>
     <div v-else class="container">
       <form>
@@ -122,4 +123,9 @@ const searchedRecipes = computed(() => {
     <p class="text-center">Szabó Zsolt, Szlobodnik Dániel</p>
   </footer>
 </template>
-<style scoped></style>
+<style scoped>
+.nincs-talalat{
+  color: red;
+  font-size: 30px;
+}
+</style>
