@@ -1,18 +1,19 @@
 <script setup>
-
+const props = defineProps({
+    recipeList: Array
+})
 
 </script>
 
 <template>
     <section class="mt-5">
         <div class="d-flex">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+            <div v-for="recipe in recipeList" class="card" style="width: 18rem;">
+                <img src="" class="card-img-top" alt="">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card’s content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">{{ recipe.getNev() }}</h5>
+                    <p class="card-text">{{ recipe.getLeiras() }}</p>
+                    <a href="#" class="btn btn-primary">Kedvencekhez adás</a>
                 </div>
             </div>
         </div>

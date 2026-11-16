@@ -9,8 +9,8 @@ const form = ref(false)
 const recipeList = ref([])
 
 for (let i = 0; i < recipeData.length; i++) {
-  var r = recipeData[i].value
-  recipeList.value.push(new Recipe(r.getKep, r.getNev, r.getElkeszIdo, r.getNehezseg, r.getLeiras))
+  var r = recipeData[i]
+  recipeList.value.push(new Recipe(r.kep, r.nev, r.elkeszIdo, r.nehezseg, r.leiras))
   
 }
 
