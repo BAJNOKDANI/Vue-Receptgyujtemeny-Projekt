@@ -3,7 +3,7 @@ import SearchBar from './components/SearchBar.vue';
 import RecipeCard from './components/RecipeCard.vue';
 import { recipeData } from './data/recipeData.js';
 import Recipe from './classes/Recipe.js';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const form = ref(false)
 const recipes = ref([]);
@@ -12,6 +12,10 @@ const nev = ref("");
 const elkeszites = ref("");
 const nehezseg = ref("");
 const leiras = ref("");
+
+
+const search = ref("");
+
 
 
 
@@ -43,6 +47,19 @@ recipes.value.push(new Recipe(nev.value, elkeszites.value, nehezseg.value, leira
 console.log(recipes.value)
 }
 
+const keyup = (f) => {
+  search.value = f;
+}
+
+const searchedRecipes = computed(() => {
+  if (search.value == "") {
+    return recipes.value;
+  }
+  else {
+    return recipes.value.filter(r => r.getNev().toLowerCase().includes(search.value.toLowerCase()));
+  }
+});
+
 
 
 </script>
@@ -73,8 +90,8 @@ console.log(recipes.value)
   </header>
   <main class="mt-3">
     <div v-if="!form" class="container">
-      <SearchBar />
-      <RecipeCard :recipes="recipes" />
+      <SearchBar @keyUp="keyup"/>
+      <RecipeCard :recipes="searchedRecipes" />
     </div>
     <div v-else class="container">
       <form>
