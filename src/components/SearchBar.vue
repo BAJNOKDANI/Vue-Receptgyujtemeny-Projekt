@@ -1,4 +1,13 @@
 <script setup>
+import { ref } from 'vue';
+
+const search = ref("");
+
+const emit = defineEmits(["keyUp"]);
+
+const press = () => {
+    emit("keyUp", search.value);
+}
 
 </script>
 
@@ -7,7 +16,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="form">
-                    <input type="text" class="form-control search" placeholder="Keress receptet...">
+                    <input type="text" v-model="search" class="form-control" placeholder="Keresés..." @keyup="press">
                 </div>
             </div>
             <div class="col-lg-3">
@@ -26,7 +35,7 @@
                         <option selected>Rendezés</option>
                         <option value="1">Név</option>
                         <option value="2">Elkészítési idő szerint</option>
-                        <option value="3">Nehézség</option>  
+                        <option value="3">Nehézség</option>
                     </select>
                 </div>
             </div>
