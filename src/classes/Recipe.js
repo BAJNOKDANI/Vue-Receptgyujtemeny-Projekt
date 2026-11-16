@@ -1,4 +1,4 @@
-export default class Questions {
+export default class Recipe {
     #kep;
     #nev;
     #elkeszIdo;

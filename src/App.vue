@@ -3,8 +3,16 @@ import SearchBar from './components/SearchBar.vue';
 import RecipeCard from './components/RecipeCard.vue';
 import { recipeData } from './data/recipeData.js';
 import { ref } from 'vue';
+import Recipe from './classes/Recipe.js';
 
 const form = ref(false)
+const recipeList = ref([])
+
+for (let i = 0; i < recipeData.length; i++) {
+  var r = recipeData[i].value
+  recipeList.value.push(new Recipe(r.getKep, r.getNev, r.getElkeszIdo, r.getNehezseg, r.getLeiras))
+  
+}
 
 const formSwitch = () => {
   if (form.value == true) {
@@ -44,7 +52,7 @@ const formSwitch = () => {
   <main class="mt-3">
     <div v-if="!form" class="container">
       <SearchBar />
-      <RecipeCard :recipeData="recipeData" />
+      <RecipeCard :recipeList="recipeList" />
     </div>
     <div v-else class="container">
       <form>
