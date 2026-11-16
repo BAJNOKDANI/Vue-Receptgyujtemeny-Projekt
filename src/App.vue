@@ -16,6 +16,12 @@ const leiras = ref("");
 
 const search = ref("");
 
+const konnyu = ref("könnyű");
+const kozepes = ref("közepes")
+const nehez = ref("nehéz")
+
+const difficulty = ref("");
+const sort = ref("");
 
 
 
@@ -50,14 +56,54 @@ const addRecipe = () => {
 const keyup = (f) => {
   search.value = f;
 }
+const difficultyChanged = (value) => {
+  difficulty.value = value;
+};
+
+const sortChanged = (value) => {
+  sort.value = value;
+};
 
 const searchedRecipes = computed(() => {
-  if (search.value == "") {
-    return recipes.value;
+  let result = recipes.value;
+
+  if (search.value !== "") {
+    result = result.filter(r =>
+      r.getNev().toLowerCase().includes(search.value.toLowerCase())
+    );
   }
-  else {
-    return recipes.value.filter(r => r.getNev().toLowerCase().includes(search.value.toLowerCase()));
+
+  if (difficulty.value !== "") {
+    result = result.filter(r =>
+      r.getNehezseg() === difficulty.value
+    );
   }
+
+  if (sort.value === "nev") {
+    result = [...result].sort((a, b) =>
+      a.getNev().localeCompare(b.getNev(), "hu")
+    );
+  }
+
+  else if (sort.value === "ido") {
+    result = [...result].sort((a, b) =>
+      Number(a.getElkeszIdo()) - Number(b.getElkeszIdo())
+    );
+  }
+
+  else if (sort.value === "nehezseg") {
+    const sorrend = {
+      "könnyű": 1,
+      "közepes": 2,
+      "nehéz": 3
+    };
+
+    result = [...result].sort((a, b) =>
+      sorrend[a.getNehezseg()] - sorrend[b.getNehezseg()]
+    );
+  }
+
+  return result;
 });
 
 
@@ -90,8 +136,8 @@ const searchedRecipes = computed(() => {
   </header>
   <main class="mt-3">
     <div v-if="!form" class="container">
-      <SearchBar @keyUp="keyup" />
-      <RecipeCard :recipes="searchedRecipes" />
+      <SearchBar @keyUp="keyup" @difficulty="difficultyChanged" @sort="sortChanged" />
+      <RecipeCard :recipes="searchedRecipes" :error="error" />
       <p v-if="search != '' && searchedRecipes.length == 0" class="text-center mt-5 nincs-talalat">Nincs találat</p>
     </div>
     <div v-else class="container">
@@ -124,8 +170,8 @@ const searchedRecipes = computed(() => {
   </footer>
 </template>
 <style scoped>
-.nincs-talalat{
-  color: red;
+.nincs-talalat {
+  color: #ff0000;
   font-size: 30px;
 }
 </style>

@@ -4,11 +4,11 @@ import { ref } from 'vue';
 const selected = ref(null);
 
 const props = defineProps({
-    recipes: Array
+    recipes: Array,
+    konnyu: String,
+    kozepes: String,
+    nehez: String
 })
-const konnyu = "könnyű";
-const kozepes = "közepes";
-const nehez = "nehéz";
 
 const loadImageFromUrl = (image) => {
     return new URL(image, import.meta.url).href;
@@ -25,10 +25,13 @@ const loadImageFromUrl = (image) => {
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.getNev() }}</h5>
                         <p class="card-text elkeszIdo">Elkészítési idő: {{ recipe.getElkeszIdo() }}</p>
-                        <p v-if="recipe.getNehezseg() == konnyu" class="card-text konnyu">{{ recipe.getNehezseg() }}</p>
-                        <p v-if="recipe.getNehezseg() == kozepes" class="card-text kozepes">{{ recipe.getNehezseg() }}
+                        <p class="card-text" :class="{
+                            konnyu: recipe.getNehezseg().toLowerCase() === 'könnyű',
+                            kozepes: recipe.getNehezseg().toLowerCase() === 'közepes',
+                            nehez: recipe.getNehezseg().toLowerCase() === 'nehéz'
+                        }">
+                            {{ recipe.getNehezseg() }}
                         </p>
-                        <p v-if="recipe.getNehezseg() == nehez" class="card-text nehez">{{ recipe.getNehezseg() }}</p>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#recipeModal" @click="selected = recipe">Részletek</button>
                     </div>
