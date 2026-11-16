@@ -1,4 +1,8 @@
 <script setup>
+import { ref } from 'vue';
+
+const selected = ref(null);
+
 const props = defineProps({
     recipes: Array
 })
@@ -15,16 +19,35 @@ const loadImageFromUrl = (image) => {
 <template>
     <section class="mt-5">
         <div class="d-flex row">
-            <div  v-for="recipe in recipes" class="col-lg-4">
+            <div v-for="recipe in recipes" class="col-lg-4">
                 <div class="card mb-3">
                     <img :src="loadImageFromUrl(recipe.getKep())" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.getNev() }}</h5>
                         <p class="card-text elkeszIdo">Elkészítési idő: {{ recipe.getElkeszIdo() }}</p>
                         <p v-if="recipe.getNehezseg() == konnyu" class="card-text konnyu">{{ recipe.getNehezseg() }}</p>
-                        <p v-if="recipe.getNehezseg() == kozepes" class="card-text kozepes">{{ recipe.getNehezseg() }}</p>
+                        <p v-if="recipe.getNehezseg() == kozepes" class="card-text kozepes">{{ recipe.getNehezseg() }}
+                        </p>
                         <p v-if="recipe.getNehezseg() == nehez" class="card-text nehez">{{ recipe.getNehezseg() }}</p>
-                        <a href="#" class="btn btn-primary">Részletek</a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#recipeModal" @click="selected = recipe">Részletek</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="recipeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" v-if="selected">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ selected.getNev() }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img :src="loadImageFromUrl(selected.getKep())" class="modal-kep mb-3" alt="">
+                        <p>{{ selected.getLeiras() }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
                     </div>
                 </div>
             </div>
@@ -62,10 +85,11 @@ const loadImageFromUrl = (image) => {
     width: 415px;
 }
 
-.elkeszIdo{
+.elkeszIdo {
     color: gray;
 }
-.card-title{
+
+.card-title {
     font-weight: 600;
 }
 
@@ -77,6 +101,7 @@ const loadImageFromUrl = (image) => {
 }
 
 @media (max-width: 1199.98px) {
+
     .konnyu,
     .kozepes,
     .nehez {
@@ -118,5 +143,12 @@ const loadImageFromUrl = (image) => {
     .btn {
         width: 100%;
     }
+}
+
+.modal-kep {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 </style>
