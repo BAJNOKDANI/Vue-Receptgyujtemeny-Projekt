@@ -68,4 +68,55 @@ const loadImageFromUrl = (image) => {
 .card-title{
     font-weight: 600;
 }
+
+@media (max-width: 1399.98px) {
+    .card img {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .konnyu,
+    .kozepes,
+    .nehez {
+        width: fit-content;
+        padding-right: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .col-lg-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .card img {
+        height: 240px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .card img {
+        height: 220px;
+    }
+
+    .card-title {
+        font-size: 1.15rem;
+    }
+
+    .elkeszIdo {
+        font-size: 16px;
+    }
+
+    .konnyu,
+    .kozepes,
+    .nehez {
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
 </style>

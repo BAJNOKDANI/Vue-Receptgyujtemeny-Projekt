@@ -33,4 +33,25 @@
         </div>
     </section>
 </template>
-<style scoped></style>
+<style scoped>
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .col-lg-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .col-lg-6,
+    .col-lg-3 {
+        margin-bottom: 0.75rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .form-control,
+    .form-select {
+        font-size: 16px;
+    }
+}
+</style>
