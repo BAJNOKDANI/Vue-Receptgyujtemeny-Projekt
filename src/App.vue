@@ -2,17 +2,20 @@
 import SearchBar from './components/SearchBar.vue';
 import RecipeCard from './components/RecipeCard.vue';
 import { recipeData } from './data/recipeData.js';
-import { ref } from 'vue';
 import Recipe from './classes/Recipe.js';
+import { ref } from 'vue';
 
 const form = ref(false)
-const recipeList = ref([])
+const recipes = ref([]);
 
-for (let i = 0; i < recipeData.length; i++) {
-  var r = recipeData[i]
-  recipeList.value.push(new Recipe(r.kep, r.nev, r.elkeszIdo, r.nehezseg, r.leiras))
-  
+const init = () => {
+  for (let i = 0; i < recipeData.length; i++) {
+    const r = recipeData[i];
+    recipes.value.push(new Recipe(r.kep, r.nev, r.elkeszIdo, r.nehezseg, r.leiras))
+  }
 }
+
+init();
 
 const formSwitch = () => {
   if (form.value == true) {
@@ -21,6 +24,10 @@ const formSwitch = () => {
   else {
     form.value = true;
   }
+
+  const loadImageFromUrl = (image) =>{
+    return new URL(image, import.meta.url).href;
+}
 
 }
 </script>
@@ -52,7 +59,7 @@ const formSwitch = () => {
   <main class="mt-3">
     <div v-if="!form" class="container">
       <SearchBar />
-      <RecipeCard :recipeList="recipeList" />
+      <RecipeCard :recipes="recipes" />
     </div>
     <div v-else class="container">
       <form>

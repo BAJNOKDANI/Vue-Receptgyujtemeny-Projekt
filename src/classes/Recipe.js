@@ -30,7 +30,7 @@ export default class Recipe {
     }
 
     setNev(nev) {
-        this.#elkeszIdo = nev;
+        this.#nev = nev;
     }
 
     setElkeszIdo(elkeszIdo) {
