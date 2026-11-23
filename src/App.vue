@@ -49,9 +49,7 @@ const loadImageFromUrl = (image) => {
 }
 
 const addRecipe = () => {
-  recipes.value.push(new Recipe(
-    "", nev.value, elkeszites.value, nehezseg.value,leiras.value
-  ));
+  recipes.value.push(new Recipe("", nev.value, elkeszites.value, nehezseg.value, leiras.value));
 
   nev.value = "";
   elkeszites.value = "";
@@ -70,7 +68,7 @@ const sortChanged = (value) => {
   sort.value = value;
 };
 
-const deleteRecipe = (index) =>{
+const deleteRecipe = (index) => {
   recipes.value.splice(index, 1)
 
 }
