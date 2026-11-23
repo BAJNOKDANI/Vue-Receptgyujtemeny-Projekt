@@ -49,8 +49,14 @@ const loadImageFromUrl = (image) => {
 }
 
 const addRecipe = () => {
-  recipes.value.push(new Recipe(nev.value, elkeszites.value, nehezseg.value, leiras.value))
-  console.log(recipes.value)
+  recipes.value.push(new Recipe(
+    "", nev.value, elkeszites.value, nehezseg.value,leiras.value
+  ));
+
+  nev.value = "";
+  elkeszites.value = "";
+  nehezseg.value = "";
+  leiras.value = "";
 }
 
 const keyup = (f) => {
