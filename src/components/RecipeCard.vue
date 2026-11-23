@@ -40,12 +40,9 @@ const loadImageFromUrl = (image) => {
                         </p>
                         <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
                             data-bs-target="#recipeModal" @click="selected = recipe">Részletek</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal"
+                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#editModal"
                             @click="selected = recipe">Módosítás</button>
                             <button type="button" class="btn btn-danger" @click="deleteRecipe(index)">Törlés</button>
-
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#editModal"  @click="selected = recipe">Módosítás</button>
                     </div>
                 </div>
             </div>
