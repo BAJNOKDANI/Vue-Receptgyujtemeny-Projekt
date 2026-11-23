@@ -34,11 +34,32 @@ const loadImageFromUrl = (image) => {
                         </p>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#recipeModal" @click="selected = recipe">Részletek</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#editModal"  @click="selected = recipe">Módosítás</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal fade" id="recipeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" v-if="selected">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ selected.getNev() }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img :src="loadImageFromUrl(selected.getKep())" class="modal-kep mb-3" alt="">
+                        <p>{{ selected.getLeiras() }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content" v-if="selected">
                     <div class="modal-header">
