@@ -59,9 +59,9 @@ const loadImageFromUrl = (image) => {
                         </p>
                         <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
                             data-bs-target="#recipeModal" @click="selected = recipe">Részletek</button>
-                        <button type="button" class="btn btn-warning me-3" data-bs-toggle="modal"
-                            data-bs-target="#editModal" @click="openEdit(recipe)">Módosítás</button>
-                        <button type="button" class="btn btn-danger" @click="deleteRecipe(index)">Törlés</button>
+                        <button type="button" class="btn btn-warning me-3 modositas" data-bs-toggle="modal" data-bs-target="#editModal"
+                            @click="openEdit(recipe)">Módosítás</button>
+                            <button type="button" class="btn btn-danger" @click="deleteRecipe(index)">Törlés</button>
                     </div>
                 </div>
             </div>
@@ -202,6 +202,10 @@ const loadImageFromUrl = (image) => {
 
     .btn {
         width: 100%;
+    }
+    .modositas{
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 }
 
