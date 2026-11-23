@@ -34,7 +34,7 @@ const rendezes = () => {
             </div>
 
             <div class="col-lg-3">
-                <select class="form-select" v-model="option" @change="nehezsegiSzint">
+                <select class="form-select selectNehezseg" v-model="option" @change="nehezsegiSzint">
                     <option value="">Minden nehézség</option>
                     <option value="könnyű">Könnyű</option>
                     <option value="közepes">Közepes</option>
@@ -53,3 +53,11 @@ const rendezes = () => {
         </div>
     </section>
 </template>
+<style scoped>
+@media (max-width: 767.98px) {
+    .selectNehezseg{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+</style>
