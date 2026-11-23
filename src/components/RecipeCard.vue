@@ -27,7 +27,6 @@ const openEdit = (recipe) => {
     leiras.value = "";
 }
 
-// Ami üresen marad, az a régi értéket tartja meg (így a régi kép is megmarad)
 const saveEdit = () => {
     emit("editRecipe", selected.value, {
         nev: nev.value.trim() || selected.value.getNev(),

@@ -69,7 +69,6 @@ const deleteRecipe = (index) =>{
 
 }
 
-// A régi receptet egy új példányra cseréljük, így a kártya is frissül
 const editRecipe = (recipe, data) => {
   const i = recipes.value.indexOf(recipe);
   if (i !== -1) {
