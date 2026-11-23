@@ -10,6 +10,12 @@ const props = defineProps({
     nehez: String
 })
 
+const emit = defineEmits(["deleteRecipe"])
+
+const deleteRecipe = (index) => {
+    emit("deleteRecipe", index);
+}
+
 const loadImageFromUrl = (image) => {
     return new URL(image, import.meta.url).href;
 };
@@ -19,7 +25,7 @@ const loadImageFromUrl = (image) => {
 <template>
     <section class="mt-5">
         <div class="d-flex row">
-            <div v-for="recipe in recipes" class="col-lg-4">
+            <div v-for="(recipe, index) in recipes" class="col-lg-4">
                 <div class="card mb-3">
                     <img :src="loadImageFromUrl(recipe.getKep())" class="card-img-top" alt="">
                     <div class="card-body">
@@ -36,6 +42,10 @@ const loadImageFromUrl = (image) => {
                             data-bs-target="#recipeModal" @click="selected = recipe">Részletek</button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal"
                             @click="selected = recipe">Módosítás</button>
+                            <button type="button" class="btn btn-danger" @click="deleteRecipe(index)">Törlés</button>
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#editModal"  @click="selected = recipe">Módosítás</button>
                     </div>
                 </div>
             </div>

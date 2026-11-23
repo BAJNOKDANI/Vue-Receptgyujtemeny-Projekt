@@ -64,6 +64,11 @@ const sortChanged = (value) => {
   sort.value = value;
 };
 
+const deleteRecipe = (index) =>{
+  recipes.value.splice(index, 1)
+  
+}
+
 const searchedRecipes = computed(() => {
   let result = recipes.value;
 
@@ -137,7 +142,7 @@ const searchedRecipes = computed(() => {
   <main class="mt-3">
     <div v-if="!form" class="container">
       <SearchBar @keyUp="keyup" @difficulty="difficultyChanged" @sort="sortChanged" />
-      <RecipeCard :recipes="searchedRecipes" :error="error" />
+      <RecipeCard :recipes="searchedRecipes" :error="error" @deleteRecipe="deleteRecipe" />
       <p v-if="search != '' && searchedRecipes.length == 0" class="text-center mt-5 nincs-talalat">Nincs találat</p>
     </div>
     <div v-else class="container">
