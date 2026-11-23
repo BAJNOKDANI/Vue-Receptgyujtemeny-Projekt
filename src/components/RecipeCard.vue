@@ -10,10 +10,30 @@ const props = defineProps({
     nehez: String
 })
 
-const emit = defineEmits(["deleteRecipe"])
+const emit = defineEmits(["deleteRecipe", "editRecipe"])
 
 const deleteRecipe = (index) => {
     emit("deleteRecipe", index);
+}
+
+const nev = ref("");
+const kep = ref("");
+const leiras = ref("");
+
+const openEdit = (recipe) => {
+    selected.value = recipe;
+    nev.value = "";
+    kep.value = "";
+    leiras.value = "";
+}
+
+// Ami üresen marad, az a régi értéket tartja meg (így a régi kép is megmarad)
+const saveEdit = () => {
+    emit("editRecipe", selected.value, {
+        nev: nev.value.trim() || selected.value.getNev(),
+        kep: kep.value.trim() || selected.value.getKep(),
+        leiras: leiras.value.trim() || selected.value.getLeiras()
+    });
 }
 
 const loadImageFromUrl = (image) => {
@@ -41,7 +61,7 @@ const loadImageFromUrl = (image) => {
                         <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
                             data-bs-target="#recipeModal" @click="selected = recipe">Részletek</button>
                         <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#editModal"
-                            @click="selected = recipe">Módosítás</button>
+                            @click="openEdit(recipe)">Módosítás</button>
                             <button type="button" class="btn btn-danger" @click="deleteRecipe(index)">Törlés</button>
                     </div>
                 </div>
@@ -76,15 +96,18 @@ const loadImageFromUrl = (image) => {
                         </div>
                     </div>
                     <div class="modal-body">
-                        <img :src="loadImageFromUrl(selected.getKep())" class="modal-kep mb-3" alt="">
+                        <img :src="loadImageFromUrl(kep.trim() || selected.getKep())" class="modal-kep mb-3" alt="">
                         <label class="form-label">Kép URL</label>
-                        <input style="width: 50%;" v-model="kep" type="text" class="form-control mb-3">
+                        <input style="width: 50%;" v-model="kep" type="text" class="form-control mb-3"
+                            placeholder="https://...">
+
                         <label class="form-label">Leírás</label>
                         <textarea v-model="leiras" class="form-control" :placeholder="selected.getLeiras()"
                             id="floatingTextarea"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="saveEdit">Mentés</button>
                     </div>
                 </div>
             </div>

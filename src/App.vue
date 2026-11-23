@@ -66,7 +66,15 @@ const sortChanged = (value) => {
 
 const deleteRecipe = (index) =>{
   recipes.value.splice(index, 1)
-  
+
+}
+
+// A régi receptet egy új példányra cseréljük, így a kártya is frissül
+const editRecipe = (recipe, data) => {
+  const i = recipes.value.indexOf(recipe);
+  if (i !== -1) {
+    recipes.value.splice(i, 1, new Recipe(data.kep, data.nev, recipe.getElkeszIdo(), recipe.getNehezseg(), data.leiras));
+  }
 }
 
 const searchedRecipes = computed(() => {
@@ -142,7 +150,7 @@ const searchedRecipes = computed(() => {
   <main class="mt-3">
     <div v-if="!form" class="container">
       <SearchBar @keyUp="keyup" @difficulty="difficultyChanged" @sort="sortChanged" />
-      <RecipeCard :recipes="searchedRecipes" :error="error" @deleteRecipe="deleteRecipe" />
+      <RecipeCard :recipes="searchedRecipes" :error="error" @deleteRecipe="deleteRecipe" @editRecipe="editRecipe" />
       <p v-if="search != '' && searchedRecipes.length == 0" class="text-center mt-5 nincs-talalat">Nincs találat</p>
     </div>
     <div v-else class="container">
